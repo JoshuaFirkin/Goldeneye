@@ -2,15 +2,39 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour {
+public class Weapon : MonoBehaviour
+{
+    public Vector3 weaponOffset = Vector3.zero;
+    public Camera cam;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    public float firingRate = 1.0f;
+    public float damage = 10.0f;
+    public float range = 100.0f;
+
+    public ParticleSystem muzzleFlash;
+
+    private float timeToFire = 0.0f;
+
+    public virtual void Fire()
+    {
+        Debug.Log("PEW! PEW!");
+        if (Time.time >= timeToFire)
+        {
+            timeToFire = Time.time + 1.0f / firingRate;
+            ShootRay();
+            muzzleFlash.Play();
+        }
+
+        return;
+    }
+
+    void ShootRay()
+    {
+        RaycastHit hitInfo;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, range))
+        {
+            // APPLY DAMAGE HERE.
+            Debug.Log("HIT: " + hitInfo.transform.name);
+        }
+    }
 }
