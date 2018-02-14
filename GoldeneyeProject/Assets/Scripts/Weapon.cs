@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    public Vector3 weaponOffset = Vector3.zero;
+    [HideInInspector]
     public Camera cam;
 
+    [Header("Transforms")]
+    public Vector3 weaponOffset = Vector3.zero;
+
+    [Header("Stats")]
     public float firingRate = 1.0f;
     public float damage = 10.0f;
     public float range = 100.0f;
 
+    [Header("Effects")]
     public ParticleSystem muzzleFlash;
 
     private float timeToFire = 0.0f;
