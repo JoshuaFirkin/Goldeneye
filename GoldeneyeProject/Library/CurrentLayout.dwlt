@@ -393,18 +393,18 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets
+    - Assets/Graphics
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets
+  - Assets/Graphics
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Josh\Documents\GitHub\Goldeneye\GoldeneyeProject
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 55}
-    m_SelectedIDs: c4240000
-    m_LastClickedID: 9412
+    m_SelectedIDs: 12250000
+    m_LastClickedID: 9490
     m_ExpandedIDs: 00000000c42400001225000044250000342600000627000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -460,7 +460,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -549,9 +549,9 @@ MonoBehaviour:
     height: 655
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 22280000
-    m_LastClickedID: 10274
-    m_ExpandedIDs: e4fbffff00000000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: c6fbffffe4fbffff00000000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -606,9 +606,9 @@ MonoBehaviour:
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0.41632318, y: 1.9745218, z: 5.6279097}
+    m_Target: {x: -3.1949663, y: 2.3733358, z: -0.7700088}
     speed: 2
-    m_Value: {x: 0.41632318, y: 1.9745218, z: 5.6279097}
+    m_Value: {x: -3.1949663, y: 2.3733358, z: -0.7700088}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -631,9 +631,9 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
   m_Rotation:
-    m_Target: {x: 0.10630173, y: 0.6949582, z: -0.10503263, w: 0.70335}
+    m_Target: {x: 0.098585375, y: 0.24890941, z: -0.025476925, w: 0.9631594}
     speed: 2
-    m_Value: {x: 0.10630173, y: 0.6949582, z: -0.10503263, w: 0.70335}
+    m_Value: {x: 0.098585375, y: 0.24890941, z: -0.025476925, w: 0.9631594}
   m_Size:
     m_Target: 4.291481
     speed: 2
