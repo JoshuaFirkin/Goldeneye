@@ -14,9 +14,8 @@ public class Weapon : MonoBehaviour
 {
     [HideInInspector]
     public Camera cam;
-
-    [Header("Transforms")]
-    public Vector3 weaponOffset = Vector3.zero;
+    [HideInInspector]
+    public Animator weaponHolderAnim;
 
     [Header("Stats")]
     public FireType fireType;
@@ -29,6 +28,7 @@ public class Weapon : MonoBehaviour
 
     [Header("Effects")]
     public ParticleSystem muzzleFlash;
+    public Transform bulletImpact;
 
     private float timeToFire = 0.0f;
     private int crntClip;
@@ -62,6 +62,7 @@ public class Weapon : MonoBehaviour
         {
             // APPLY DAMAGE HERE.
             Debug.Log("HIT: " + hitInfo.transform.name);
+            ObjectPooler.instance.SpawnPooledObject("bulletImpact", hitInfo.point + (hitInfo.normal / 100), Quaternion.LookRotation(hitInfo.normal));
         }
     }
 

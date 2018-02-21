@@ -8604,16 +8604,6 @@ See Also: WWW.assetBundle, WWW.LoadFromCacheOrDownload.</param>
       <summary>
         <para>Delete all AssetBundle and Procedural Material content that has been cached by the current application.</para>
       </summary>
-      <param name="expiration">The number of seconds that AssetBundles may remain unused in the cache.</param>
-      <returns>
-        <para>True when cache cleaning succeeded, false if cache was in use.</para>
-      </returns>
-    </member>
-    <member name="M:UnityEngine.Caching.CleanCache(System.Int32)">
-      <summary>
-        <para>Delete all AssetBundle and Procedural Material content that has been cached by the current application.</para>
-      </summary>
-      <param name="expiration">The number of seconds that AssetBundles may remain unused in the cache.</param>
       <returns>
         <para>True when cache cleaning succeeded, false if cache was in use.</para>
       </returns>
@@ -24789,16 +24779,6 @@ Only usable on Android, Windows Phone or Windows Tablets.</para>
         <para>iPhone 7 Plus.</para>
       </summary>
     </member>
-    <member name="F:UnityEngine.iOS.DeviceGeneration.iPhone8">
-      <summary>
-        <para>iPhone 8.</para>
-      </summary>
-    </member>
-    <member name="F:UnityEngine.iOS.DeviceGeneration.iPhone8Plus">
-      <summary>
-        <para>iPhone 8 Plus.</para>
-      </summary>
-    </member>
     <member name="F:UnityEngine.iOS.DeviceGeneration.iPhoneSE1Gen">
       <summary>
         <para>iPhone SE, first generation.</para>
@@ -24807,11 +24787,6 @@ Only usable on Android, Windows Phone or Windows Tablets.</para>
     <member name="F:UnityEngine.iOS.DeviceGeneration.iPhoneUnknown">
       <summary>
         <para>Yet unknown iPhone.</para>
-      </summary>
-    </member>
-    <member name="F:UnityEngine.iOS.DeviceGeneration.iPhoneX">
-      <summary>
-        <para>iPhone X.</para>
       </summary>
     </member>
     <member name="F:UnityEngine.iOS.DeviceGeneration.iPodTouch1Gen">
