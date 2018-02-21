@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerMotor motor;
-    private Weapon currentWeapon;
+    private PlayerInventory inv;
 
     public Camera cam;
 
@@ -17,7 +17,9 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         motor = GetComponent<PlayerMotor>();
+        inv = GetComponent<PlayerInventory>();
     }
+
 
     void Update()
     {
@@ -40,13 +42,28 @@ public class PlayerController : MonoBehaviour
         motor.AddCameraRotation(camRotation);
 
 
-        if (currentWeapon != null)
+        if (inv.currentWeapon != null)
         {
             if (Input.GetAxisRaw("Fire") > 0)
             {
                 //Fire the weapon.
-                currentWeapon.Fire();
+                inv.currentWeapon.Fire();
             }
+
+            if (Input.GetButtonDown("Reload"))
+            {
+                StartCoroutine(inv.currentWeapon.Reload());
+            }
+
+            if (Input.GetButtonDown("WeaponSwitch"))
+            {
+                inv.WeaponSwitch();
+            }
+        }
+
+        if (Input.GetButtonDown("Interact"))
+        {
+            Interact();
         }
     }
 
@@ -58,22 +75,20 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Weapon interacted.");
             if (other.GetComponent<Weapon>() != null)
             {
-                PickupWeapon(other.gameObject.GetComponent<Weapon>());
+                inv.PickupWeapon(other.gameObject.GetComponent<Weapon>());
             }
         }
     }
 
 
-    public void PickupWeapon(Weapon weapon)
+    void Interact()
     {
-        Debug.Log("Weapon picked up.");
-
-        currentWeapon = weapon;
-        currentWeapon.transform.SetParent(cam.transform);
-        currentWeapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        currentWeapon.transform.localPosition = currentWeapon.weaponOffset;
-
-        currentWeapon.cam = cam;
-        currentWeapon.GetComponent<Collider>().enabled = false;
+        RaycastHit hitInfo;
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, 3))
+        {
+            // INTERACT WITH OBJECT
+            Debug.Log("Interacting with " + hitInfo.transform.name);
+            Debug.DrawRay(cam.transform.position, cam.transform.forward * 3, Color.green, 1.0f);
+        }
     }
 }
