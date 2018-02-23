@@ -7,7 +7,7 @@ public class MachineGun : Weapon
     MachineGun()
     {
         firingRate = 8.0f;
-        damage = 30.0f;
+        damage = 30;
         range = 120.0f;
         clipSize = 30;
         inventorySize = 90;

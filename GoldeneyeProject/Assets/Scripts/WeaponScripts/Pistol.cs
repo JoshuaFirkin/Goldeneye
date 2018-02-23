@@ -7,7 +7,7 @@ public class Pistol : Weapon
     Pistol()
     {
         firingRate = 4.0f;
-        damage = 10.0f;
+        damage = 10;
         range = 60.0f;
         clipSize = 12;
         inventorySize = 36;

@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     [Header("Stats")]
     public FireType fireType;
     public float firingRate = 1.0f;
-    public float damage = 10.0f;
+    public int damage = 10;
     public float range = 100.0f;
     public int clipSize = 20;
     public int inventorySize = 20;
@@ -49,20 +49,26 @@ public class Weapon : MonoBehaviour
             timeToFire = Time.time + 1.0f / firingRate;
             ShootRay();
             crntClip--;
-            Debug.Log("Current Clip: " + crntClip.ToString());
             muzzleFlash.Play();
         }
     }
 
 
-    void ShootRay()
+    protected virtual void ShootRay()
     {
         RaycastHit hitInfo;
         if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, range))
         {
             // APPLY DAMAGE HERE.
-            Debug.Log("HIT: " + hitInfo.transform.name);
-            ObjectPooler.instance.SpawnPooledObject("bulletImpact", hitInfo.point + (hitInfo.normal / 100), Quaternion.LookRotation(hitInfo.normal));
+            if (hitInfo.transform.tag == "Player")
+            {
+                PlayerHealth playerHP = hitInfo.transform.GetComponent<PlayerHealth>();
+                playerHP.TakeDamage(damage);
+            }
+            else
+            {
+                ObjectPooler.instance.SpawnPooledObject("bulletImpact", hitInfo.point + (hitInfo.normal / 100), Quaternion.LookRotation(hitInfo.normal));
+            }
         }
     }
 
