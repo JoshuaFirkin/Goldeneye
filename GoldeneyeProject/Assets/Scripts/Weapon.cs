@@ -30,6 +30,9 @@ public class Weapon : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public Transform bulletImpact;
 
+
+
+
     private float timeToFire = 0.0f;
     private int crntClip;
     private int crntInventory;
@@ -64,6 +67,12 @@ public class Weapon : MonoBehaviour
             {
                 PlayerHealth playerHP = hitInfo.transform.GetComponent<PlayerHealth>();
                 playerHP.TakeDamage(damage);
+            }
+            if (hitInfo.transform.tag == "Destructible")
+            {
+                Explosion desHealth = hitInfo.transform.GetComponent<Explosion>();
+                desHealth.Destruct(damage);
+                ObjectPooler.instance.SpawnPooledObject("bulletImpact", hitInfo.point + (hitInfo.normal / 100), Quaternion.LookRotation(hitInfo.normal));
             }
             else
             {
@@ -100,4 +109,6 @@ public class Weapon : MonoBehaviour
         canFire = true;
         Debug.Log(crntClip + " / " + crntInventory);
     }
+
+
 }
