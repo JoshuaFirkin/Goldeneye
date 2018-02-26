@@ -25,12 +25,14 @@ public class Weapon : MonoBehaviour
     public int clipSize = 20;
     public int inventorySize = 20;
     public float reloadTime = 3.0f;
+    [Range(0,1)]
+    public float recoilRangeX = 0.0f;
+    [Range(0, 1)]
+    public float recoilRangeY = 0.0f;
 
     [Header("Effects")]
     public ParticleSystem muzzleFlash;
     public Transform bulletImpact;
-
-
 
 
     private float timeToFire = 0.0f;
@@ -45,7 +47,7 @@ public class Weapon : MonoBehaviour
     }
 
 
-    public virtual void Fire()
+    public virtual bool Fire()
     {
         if (Time.time >= timeToFire && crntClip > 0 && canFire)
         {
@@ -53,28 +55,39 @@ public class Weapon : MonoBehaviour
             ShootRay();
             crntClip--;
             muzzleFlash.Play();
+            return true;
         }
+
+        return false;
     }
 
 
     protected virtual void ShootRay()
     {
+        Vector3 recoilPath = new Vector3
+            (
+            Random.Range(-recoilRangeX, recoilRangeX),
+            Random.Range(-recoilRangeY, recoilRangeY),
+            0
+            );
+
         RaycastHit hitInfo;
-        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out hitInfo, range))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward + (recoilPath / 10), out hitInfo, range))
         {
             // APPLY DAMAGE HERE.
+
             if (hitInfo.transform.tag == "Player")
             {
                 PlayerHealth playerHP = hitInfo.transform.GetComponent<PlayerHealth>();
                 playerHP.TakeDamage(damage);
             }
-            if (hitInfo.transform.tag == "Destructible")
+            else if (hitInfo.transform.tag == "Destructible")
             {
                 Explosion desHealth = hitInfo.transform.GetComponent<Explosion>();
                 desHealth.Destruct(damage);
-                ObjectPooler.instance.SpawnPooledObject("bulletImpact", hitInfo.point + (hitInfo.normal / 100), Quaternion.LookRotation(hitInfo.normal));
             }
-            else
+
+            if (hitInfo.transform.tag != "Player")
             {
                 ObjectPooler.instance.SpawnPooledObject("bulletImpact", hitInfo.point + (hitInfo.normal / 100), Quaternion.LookRotation(hitInfo.normal));
             }

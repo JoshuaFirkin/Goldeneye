@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerMotor motor;
     private PlayerInventory inv;
+    private Animator anim;
 
     public Camera cam;
 
@@ -18,6 +19,7 @@ public class PlayerController : MonoBehaviour
     {
         motor = GetComponent<PlayerMotor>();
         inv = GetComponent<PlayerInventory>();
+        anim = GetComponent<Animator>();
     }
 
 
@@ -47,7 +49,10 @@ public class PlayerController : MonoBehaviour
             if (Input.GetAxisRaw("Fire") > 0)
             {
                 //Fire the weapon.
-                inv.currentWeapon.Fire();
+                if (inv.currentWeapon.Fire())
+                {
+                    anim.CrossFadeInFixedTime("Recoil_Anim", 0);
+                }
             }
 
             if (Input.GetButtonDown("Reload"))
