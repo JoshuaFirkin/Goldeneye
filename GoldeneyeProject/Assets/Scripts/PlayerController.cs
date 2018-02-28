@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour
 {
+    public AmmoUI ammoUI;
+
     private PlayerMotor motor;
     private PlayerInventory inv;
     private Animator anim;
@@ -65,6 +67,7 @@ public class PlayerController : MonoBehaviour
                 if (inv.currentWeapon.Fire())
                 {
                     anim.CrossFadeInFixedTime("Recoil_Anim", 0);
+                    ammoUI.UpdateClip(inv.currentWeapon.crntClip);
                 }
             }
 

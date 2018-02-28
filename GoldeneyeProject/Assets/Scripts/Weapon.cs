@@ -17,8 +17,10 @@ public class Weapon : MonoBehaviour
     [HideInInspector]
     public Animator weaponHolderAnim;
 
+    public AmmoUI ammoUI;
+
     [Header("Stats")]
-    public FireType fireType;
+    public Sprite bulletImage;
     public float firingRate = 1.0f;
     public int damage = 10;
     public float range = 100.0f;
@@ -34,10 +36,10 @@ public class Weapon : MonoBehaviour
     public ParticleSystem muzzleFlash;
     public Transform bulletImpact;
 
+    public int crntClip { get; private set; }
+    public int crntInventory { get; private set; }
 
     private float timeToFire = 0.0f;
-    private int crntClip;
-    private int crntInventory;
     private bool canFire = true;
 
     void Awake()
@@ -122,6 +124,7 @@ public class Weapon : MonoBehaviour
         }
 
         canFire = true;
+        ammoUI.UpdateClipAndInventory(crntClip, crntInventory);
 
         Debug.Log(crntClip + " / " + crntInventory);
     }

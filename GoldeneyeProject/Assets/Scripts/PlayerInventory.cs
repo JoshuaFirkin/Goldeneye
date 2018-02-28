@@ -6,6 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     public Camera cam;
     public Transform weaponHolder;
+    public AmmoUI ammoUI;
 
     [HideInInspector]
     public Weapon currentWeapon;
@@ -46,6 +47,9 @@ public class PlayerInventory : MonoBehaviour
         currentWeapon.cam = cam;
         currentWeapon.weaponHolderAnim = weaponHolder.GetComponent<Animator>();
         currentWeapon.GetComponent<Collider>().enabled = false;
+
+        ammoUI.UpdateImage(currentWeapon.bulletImage);
+        ammoUI.UpdateClipAndInventory(currentWeapon.crntClip, currentWeapon.crntInventory);
     }
 
 
@@ -63,5 +67,8 @@ public class PlayerInventory : MonoBehaviour
 
         currentWeapon = inventoryWeapons[weaponIdx];
         currentWeapon.gameObject.SetActive(true);
+
+        ammoUI.UpdateImage(currentWeapon.bulletImage);
+        ammoUI.UpdateClipAndInventory(currentWeapon.crntClip, currentWeapon.crntInventory);
     }
 }

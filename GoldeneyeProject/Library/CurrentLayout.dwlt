@@ -259,7 +259,7 @@ MonoBehaviour:
   - {fileID: 18}
   - {fileID: 19}
   m_Selected: 0
-  m_LastSelected: 2
+  m_LastSelected: 1
 --- !u!114 &12
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -389,9 +389,9 @@ MonoBehaviour:
     height: 627
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 4a28ffff
-    m_LastClickedID: -55222
-    m_ExpandedIDs: 1428ffff2028ffff4c28fffff05fffff5e66ffffda6fffffc671ffffdefbffff000000003a340000
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: b891feff5ca8ffffdefbffff000000007a280000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -442,13 +442,13 @@ MonoBehaviour:
     height: 627
   m_SceneLighting: 1
   lastFramingTime: 5132.669355898494
-  m_2DMode: 0
+  m_2DMode: 1
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 23.437761, y: -7.7256923, z: 10.805875}
+    m_Target: {x: 506.8971, y: 304.74704, z: -2.75}
     speed: 2
-    m_Value: {x: 23.437761, y: -7.7256923, z: 10.805875}
+    m_Value: {x: 506.8971, y: 304.74704, z: -2.75}
   m_RenderMode: 0
   m_ValidateTrueMetals: 0
   m_SceneViewState:
@@ -463,26 +463,26 @@ MonoBehaviour:
       speed: 2
       m_Value: 0
     yGrid:
-      m_Target: 1
-      speed: 2
-      m_Value: 1
-    zGrid:
       m_Target: 0
       speed: 2
       m_Value: 0
+    zGrid:
+      m_Target: 1
+      speed: 2
+      m_Value: 1
   m_Rotation:
-    m_Target: {x: -0.20120224, y: -0.49242026, z: 0.11815915, w: -0.8384977}
+    m_Target: {x: 0, y: 0, z: 0, w: 1}
     speed: 2
-    m_Value: {x: -0.20120224, y: -0.49242026, z: 0.11815915, w: -0.8384977}
+    m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 23.901775
+    m_Target: 659.5256
     speed: 2
-    m_Value: 23.901775
+    m_Value: 659.5256
   m_Ortho:
-    m_Target: 0
+    m_Target: 1
     speed: 2
-    m_Value: 0
-  m_LastSceneViewRotation: {x: 0.06272506, y: -0.08582515, z: 0.0054146578, w: 0.9943191}
+    m_Value: 1
+  m_LastSceneViewRotation: {x: 0.20120224, y: 0.49242023, z: -0.11815915, w: 0.8384977}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -570,19 +570,19 @@ MonoBehaviour:
     m_ShowAllHits: 0
     m_SearchArea: 0
     m_Folders:
-    - Assets/Animation
+    - Assets/Graphics/Sprites
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Animation
+  - Assets/Graphics/Sprites
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\s15122542\Downloads\Goldeneye\GoldeneyeProject
   m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 11}
-    m_SelectedIDs: 74270000
-    m_LastClickedID: 10100
-    m_ExpandedIDs: 00000000062500008625000092250000962600007827000000ca9a3bffffff7f
+    m_SelectedIDs: 44250000
+    m_LastClickedID: 9540
+    m_ExpandedIDs: 00000000082500005a25000088250000942500009a2600007e27000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -610,7 +610,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000006250000862500009225000096260000
+    m_ExpandedIDs: 000000000825000088250000942500009a2600007e270000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
