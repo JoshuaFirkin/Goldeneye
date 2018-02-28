@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Explosion : MonoBehaviour {
+public class Explosion : MonoBehaviour, iKillable
+{
 
     public float delay = 3f;
 
@@ -15,7 +16,7 @@ public class Explosion : MonoBehaviour {
     public GameObject explosionEffect;
 
     //Functions same as health loss
-    public void Destruct(int amountTaken)
+    void iKillable.TakeDamage(int amountTaken)
     {
         
         if (desHealth <= 0)
@@ -28,7 +29,6 @@ public class Explosion : MonoBehaviour {
         desHealth -= amountTaken;
         Debug.Log("Des took " + amountTaken + " damage!");
         Debug.Log("Des HP is now " + desHealth);
-
     }
 
 

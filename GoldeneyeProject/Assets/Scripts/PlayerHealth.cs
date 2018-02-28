@@ -2,11 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+[RequireComponent(typeof(PlayerController))]
+public class PlayerHealth : MonoBehaviour, iKillable
 {
+    public PlayerController controller { get; private set; }
 
     private int armourPoints = 0;
     private int hitPoints = 100;
+    private bool isDead = false;
+
+
+    void Start()
+    {
+        controller = GetComponent<PlayerController>();
+    }
 
     public void PickupArmour(int armourToGive)
     {
@@ -22,11 +31,17 @@ public class PlayerHealth : MonoBehaviour
         Debug.Log("You picked up armour!" + armourPoints);
     }
 
-	public void TakeDamage(int amountTaken)
+
+    void iKillable.TakeDamage(int amountTaken)
     {
+        if (isDead)
+        {
+            return;
+        }
+
         if (hitPoints <= 0)
         {
-            Debug.Log("DEAD");
+            Death();
             return;
         }
 
@@ -49,5 +64,14 @@ public class PlayerHealth : MonoBehaviour
         hitPoints -= amountTaken;
         Debug.Log("You took " + amountTaken + " damage!");
         Debug.Log("Your HP is now " + hitPoints);
+    }
+
+
+    void Death()
+    {
+        // Add End Game Here! Access GameMaster from here.
+        Debug.Log("DED");
+        isDead = true;
+        controller.DisableInput();
     }
 }

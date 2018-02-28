@@ -75,16 +75,10 @@ public class Weapon : MonoBehaviour
         if (Physics.Raycast(cam.transform.position, cam.transform.forward + (recoilPath / 10), out hitInfo, range))
         {
             // APPLY DAMAGE HERE.
-
-            if (hitInfo.transform.tag == "Player")
+            iKillable killable = hitInfo.collider.GetComponentInParent<iKillable>();
+            if (killable != null)
             {
-                PlayerHealth playerHP = hitInfo.transform.GetComponent<PlayerHealth>();
-                playerHP.TakeDamage(damage);
-            }
-            else if (hitInfo.transform.tag == "Destructible")
-            {
-                Explosion desHealth = hitInfo.transform.GetComponent<Explosion>();
-                desHealth.Destruct(damage);
+                killable.TakeDamage(damage);
             }
 
             if (hitInfo.transform.tag != "Player")
@@ -95,14 +89,22 @@ public class Weapon : MonoBehaviour
     }
 
 
-    public IEnumerator Reload()
+    public bool StartReload()
     {
         if (crntInventory <= 0 || crntClip == clipSize)
         {
             Debug.Log("No Reload!");
-            yield return 0;
+            return false;
         }
+        else
+        {
+            StartCoroutine(Reload());
+            return true;
+        }
+    }
 
+    IEnumerator Reload()
+    {
         canFire = false;
         yield return new WaitForSeconds(reloadTime);
 
@@ -120,6 +122,7 @@ public class Weapon : MonoBehaviour
         }
 
         canFire = true;
+
         Debug.Log(crntClip + " / " + crntInventory);
     }
 

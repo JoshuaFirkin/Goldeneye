@@ -55,11 +55,11 @@ public class ObjectPooler : MonoBehaviour
     }
 
 
-    public void SpawnPooledObject(string tag, Vector3 pos, Quaternion rot)
+    public GameObject SpawnPooledObject(string tag, Vector3 pos, Quaternion rot)
     {
         if (!poolDict.ContainsKey(tag))
         {
-            return;
+            return null;
         }
 
         GameObject obj = poolDict[tag].Dequeue();
@@ -69,5 +69,7 @@ public class ObjectPooler : MonoBehaviour
         obj.transform.rotation = rot;
 
         poolDict[tag].Enqueue(obj);
+
+        return obj;
     }
 }

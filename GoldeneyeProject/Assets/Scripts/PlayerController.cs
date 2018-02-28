@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public float movementSpeed = 10.0f;
     public float rotationSensitivity = 10.0f;
 
+    private bool inputDisabled = false;
+
 
     void Start()
     {
@@ -25,6 +27,11 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (inputDisabled)
+        {
+            return;
+        }
+
         // Applying movement to the character.
         Vector3 horMovement = transform.right * Input.GetAxis("Horizontal");
         Vector3 verMovement = transform.forward * Input.GetAxis("Vertical");
@@ -43,6 +50,12 @@ public class PlayerController : MonoBehaviour
         Vector3 camRotation = new Vector3(xRotation, 0.0f, 0.0f) * rotationSensitivity;
         motor.AddCameraRotation(camRotation);
 
+        float timer = anim.GetFloat("reloadTimer");
+        if (timer > 0)
+        {
+            anim.SetFloat("reloadTimer", timer - Time.deltaTime);
+        }
+
 
         if (inv.currentWeapon != null)
         {
@@ -57,7 +70,11 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetButtonDown("Reload"))
             {
-                StartCoroutine(inv.currentWeapon.Reload());
+                if (inv.currentWeapon.StartReload())
+                {
+                    anim.SetFloat("reloadTimer", inv.currentWeapon.reloadTime);
+                    anim.CrossFadeInFixedTime("Reload_Anim", 0);
+                }
             }
 
             if (Input.GetButtonDown("WeaponSwitch"))
@@ -95,5 +112,11 @@ public class PlayerController : MonoBehaviour
             Debug.Log("Interacting with " + hitInfo.transform.name);
             Debug.DrawRay(cam.transform.position, cam.transform.forward * 3, Color.green, 1.0f);
         }
+    }
+
+
+    public void DisableInput()
+    {
+        inputDisabled = true;
     }
 }

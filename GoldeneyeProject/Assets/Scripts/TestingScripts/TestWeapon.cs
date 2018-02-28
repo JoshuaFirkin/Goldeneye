@@ -23,12 +23,12 @@ public class TestWeapon : Weapon
         if (Physics.Raycast(barrel.transform.position, barrel.transform.forward, out hitInfo, range))
         {
             // APPLY DAMAGE HERE.
-            if (hitInfo.transform.tag == "Player")
+            iKillable killable = hitInfo.collider.GetComponentInParent<iKillable>();
+            if (killable != null)
             {
-                Debug.Log(hitInfo.transform.name);
-                PlayerHealth playerHP = hitInfo.transform.GetComponentInParent<PlayerHealth>();
-                playerHP.TakeDamage(damage);
+                killable.TakeDamage(damage);
             }
+
             ObjectPooler.instance.SpawnPooledObject("bulletImpact", hitInfo.point + (hitInfo.normal / 100), Quaternion.LookRotation(hitInfo.normal));
         }
 
