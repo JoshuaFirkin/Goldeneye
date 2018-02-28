@@ -20,6 +20,7 @@ public class Weapon : MonoBehaviour
     public AmmoUI ammoUI;
 
     [Header("Stats")]
+    public string weaponName;
     public Sprite bulletImage;
     public float firingRate = 1.0f;
     public int damage = 10;
