@@ -3,41 +3,39 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class NotificationUI : MonoBehaviour {
+public class NotificationUI : MonoBehaviour
+{
+    public Text notificationText;
 
-    public GameObject UINotifications;
     float notificationTime;
-    float clearNotificationsTime = 3.0f;
+    float clearNotificationsTime = 2.0f;
     string pickedupweapon = "KF7 Soviet";
 
 
-    public void WeaponPickup()
+    public void WeaponPickup(string name)
     {
         notificationTime = Time.time;
-        UINotifications.GetComponent<Text>().text = "Picked up a " + pickedupweapon;
+        notificationText.text = "Picked up a " + name;
+        StartCoroutine(StartTimer());
     }
 
 
-    public void AmmoPickup()
+    public void AmmoPickup(int amount)
     {
         notificationTime = Time.time;
-        UINotifications.GetComponent<Text>().text = "Picked up some ammo.";
+        notificationText.text = "Picked up " + amount + " ammo.";
+        StartCoroutine(StartTimer());
     }
 	
 
-	void Update () {
-		if (Time.time - notificationTime > clearNotificationsTime)
+    IEnumerator StartTimer()
+    {
+        while (Time.time - notificationTime < clearNotificationsTime)
         {
-            UINotifications.GetComponent<Text>().text = "";
+            yield return null;
         }
 
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            WeaponPickup();
-        }
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            AmmoPickup();
-        }
+        notificationText.text = "";
+        yield return 0;
     }
 }

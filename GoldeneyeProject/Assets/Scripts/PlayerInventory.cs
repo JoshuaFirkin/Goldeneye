@@ -7,6 +7,7 @@ public class PlayerInventory : MonoBehaviour
     public Camera cam;
     public Transform weaponHolder;
     public AmmoUI ammoUI;
+    public NotificationUI notifUI;
 
     [HideInInspector]
     public Weapon currentWeapon;
@@ -21,8 +22,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void PickupWeapon(Weapon weapon)
     {
-        Debug.Log("Weapon picked up.");
-
         inventoryWeapons.Add(weapon);
 
         if (currentWeapon != null)
@@ -50,6 +49,8 @@ public class PlayerInventory : MonoBehaviour
 
         ammoUI.UpdateImage(currentWeapon.bulletImage);
         ammoUI.UpdateClipAndInventory(currentWeapon.crntClip, currentWeapon.crntInventory);
+
+        notifUI.WeaponPickup(currentWeapon.weaponName);
     }
 
 

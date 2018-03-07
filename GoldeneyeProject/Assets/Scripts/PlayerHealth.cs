@@ -36,7 +36,6 @@ public class PlayerHealth : MonoBehaviour, iKillable
         }
 
         healthUI.UpdateArmour((float)armourPoints);
-        Debug.Log("You picked up armour!" + armourPoints);
     }
 
 

@@ -40,10 +40,6 @@ public class HealthUI : MonoBehaviour {
         StartCoroutine(FadeBars(false));
     }
 
-    void HideBars()
-    {
-        HPGroup.alpha = 0;
-    }
 
     IEnumerator FadeBars(bool down)
     {
@@ -67,10 +63,10 @@ public class HealthUI : MonoBehaviour {
         yield return 0;
     }
 	
-	// Update is called once per frame
+
 	void Update ()
     {    
-        if (Time.time - timehit > hitshowntime)
+        if (Time.time - timehit > hitshowntime && HPGroup.alpha > 0)
         {
             StartCoroutine(FadeBars(true));
         }       
