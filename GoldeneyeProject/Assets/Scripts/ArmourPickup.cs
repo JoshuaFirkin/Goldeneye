@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArmourPickup : MonoBehaviour
+public class ArmourPickup : Pickup
 {
     public int armourAmount = 100;
 
-    void OnTriggerEnter(Collider other)
+    protected override void DoAction(GameObject other)
     {
-        if (other.tag == "Player")
-        {
-            PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
-            player.PickupArmour(armourAmount);
-            Destroy(gameObject);
-        }
+        PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
+        player.PickupArmour(armourAmount);
+        Destroy(gameObject);
     }
 
 }

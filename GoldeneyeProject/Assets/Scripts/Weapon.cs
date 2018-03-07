@@ -130,5 +130,9 @@ public class Weapon : MonoBehaviour
         Debug.Log(crntClip + " / " + crntInventory);
     }
 
-
+    public void AddAmmo()
+    {
+        crntInventory += clipSize;
+        ammoUI.UpdateInventory(crntInventory);
+    }
 }
