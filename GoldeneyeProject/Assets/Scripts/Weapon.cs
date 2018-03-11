@@ -10,7 +10,7 @@ public enum FireType
 }
 
 
-public class Weapon : MonoBehaviour
+public class Weapon : MonoBehaviour, iHoldable
 {
     [HideInInspector]
     public Camera cam;
@@ -21,6 +21,7 @@ public class Weapon : MonoBehaviour
 
     [Header("Stats")]
     public string weaponName;
+    public Vector3 weaponOffset = Vector3.zero;
     public Sprite bulletImage;
     public float firingRate = 1.0f;
     public int damage = 10;
@@ -35,8 +36,8 @@ public class Weapon : MonoBehaviour
 
     [Header("Effects")]
     public ParticleSystem muzzleFlash;
-    public Transform bulletImpact;
 
+    public GameObject owner { get; private set; }
     public int crntClip { get; private set; }
     public int crntInventory { get; private set; }
 
@@ -55,7 +56,7 @@ public class Weapon : MonoBehaviour
         if (Time.time >= timeToFire && crntClip > 0 && canFire)
         {
             timeToFire = Time.time + 1.0f / firingRate;
-            ShootRay();
+            ShootMechanic();
             crntClip--;
             muzzleFlash.Play();
             return true;
@@ -65,7 +66,7 @@ public class Weapon : MonoBehaviour
     }
 
 
-    protected virtual void ShootRay()
+    protected virtual void ShootMechanic()
     {
         Vector3 recoilPath = new Vector3
             (
@@ -126,13 +127,28 @@ public class Weapon : MonoBehaviour
 
         canFire = true;
         ammoUI.UpdateClipAndInventory(crntClip, crntInventory);
+        OnReloadFinished();
 
         Debug.Log(crntClip + " / " + crntInventory);
     }
+
+
+    protected virtual void OnReloadFinished()
+    {
+        return;
+    }
+
 
     public void AddAmmo()
     {
         crntInventory += clipSize;
         ammoUI.UpdateInventory(crntInventory);
+    }
+
+    void iHoldable.OnPickup()
+    {
+        // Does nothing right now, but if you need a weapon to do something when you pick it up. pop it here.
+        Debug.Log("Weapon Pickup");
+        return;
     }
 }

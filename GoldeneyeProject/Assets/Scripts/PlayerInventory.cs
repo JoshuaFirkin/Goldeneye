@@ -40,7 +40,7 @@ public class PlayerInventory : MonoBehaviour
 
         currentWeapon = weapon;
         currentWeapon.transform.SetParent(weaponHolder);
-        currentWeapon.transform.localPosition = Vector3.zero;
+        currentWeapon.transform.localPosition = currentWeapon.weaponOffset;
         currentWeapon.transform.rotation = weaponHolder.rotation;
 
         currentWeapon.cam = cam;

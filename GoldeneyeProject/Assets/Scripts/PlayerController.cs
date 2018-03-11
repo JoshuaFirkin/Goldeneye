@@ -150,13 +150,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Weapon")
+        Debug.Log("Weapon interacted.");
+        if (other.GetComponent<Weapon>() != null)
         {
-            Debug.Log("Weapon interacted.");
-            if (other.GetComponent<Weapon>() != null)
-            {
-                inv.PickupWeapon(other.gameObject.GetComponent<Weapon>());
-            }
+            inv.PickupWeapon(other.gameObject.GetComponent<Weapon>());
         }
     }
 

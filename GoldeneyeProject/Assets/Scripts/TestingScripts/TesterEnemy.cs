@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TesterEnemy : MonoBehaviour
+public class TesterEnemy : MonoBehaviour, iKillable
 {
     public Weapon weapon;
 
@@ -18,5 +18,10 @@ public class TesterEnemy : MonoBehaviour
             weapon.Fire();
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    void iKillable.TakeDamage(int amountTaken)
+    {
+        Debug.Log("Test Damage Taken: " + amountTaken);
     }
 }

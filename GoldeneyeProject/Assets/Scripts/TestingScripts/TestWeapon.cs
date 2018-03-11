@@ -17,7 +17,7 @@ public class TestWeapon : Weapon
     }
 
 
-    protected override void ShootRay()
+    protected override void ShootMechanic()
     {
         RaycastHit hitInfo;
         if (Physics.Raycast(barrel.transform.position, barrel.transform.forward, out hitInfo, range))
