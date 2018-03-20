@@ -29,9 +29,9 @@ public class Weapon : MonoBehaviour, iHoldable
     public int clipSize = 20;
     public int inventorySize = 20;
     public float reloadTime = 3.0f;
-    [Range(0,1)]
+    [Range(0,5)]
     public float recoilRangeX = 0.0f;
-    [Range(0, 1)]
+    [Range(0, 5)]
     public float recoilRangeY = 0.0f;
 
     [Header("Effects")]
@@ -107,7 +107,8 @@ public class Weapon : MonoBehaviour, iHoldable
         }
     }
 
-    IEnumerator Reload()
+
+    protected virtual IEnumerator Reload()
     {
         canFire = false;
         yield return new WaitForSeconds(reloadTime);
@@ -144,6 +145,7 @@ public class Weapon : MonoBehaviour, iHoldable
         crntInventory += clipSize;
         ammoUI.UpdateInventory(crntInventory);
     }
+
 
     void iHoldable.OnPickup()
     {
