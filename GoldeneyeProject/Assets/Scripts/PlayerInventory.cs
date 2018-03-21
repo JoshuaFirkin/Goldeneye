@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
+    [Header("Externals")]
     public Camera cam;
     public Transform weaponHolder;
     public AmmoUI ammoUI;
     public NotificationUI notifUI;
+
+    [Header("Audio")]
+    public AudioClip pickupClip;
+    public AudioClip switchClip;
+    [SerializeField] private PlayerAudio playerAudio;
 
     [HideInInspector]
     public Weapon currentWeapon;
@@ -47,10 +53,15 @@ public class PlayerInventory : MonoBehaviour
         currentWeapon.weaponHolderAnim = weaponHolder.GetComponent<Animator>();
         currentWeapon.GetComponent<Collider>().enabled = false;
 
+        iHoldable weaponPickup = currentWeapon;
+        weaponPickup.OnPickup();
+
         ammoUI.UpdateImage(currentWeapon.bulletImage);
         ammoUI.UpdateClipAndInventory(currentWeapon.crntClip, currentWeapon.crntInventory);
 
         notifUI.WeaponPickup(currentWeapon.weaponName);
+
+        playerAudio.PlayAttachedAudio(pickupClip);
     }
 
 
@@ -71,5 +82,7 @@ public class PlayerInventory : MonoBehaviour
 
         ammoUI.UpdateImage(currentWeapon.bulletImage);
         ammoUI.UpdateClipAndInventory(currentWeapon.crntClip, currentWeapon.crntInventory);
+
+        playerAudio.PlayAttachedAudio(switchClip);
     }
 }

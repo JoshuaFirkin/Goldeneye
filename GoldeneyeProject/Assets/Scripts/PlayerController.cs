@@ -43,6 +43,17 @@ public class PlayerController : MonoBehaviour
                     interact = "Interact_XBONE";
                     break;
 
+                case RuntimePlatform.WindowsPlayer:
+                    horAxis = "Horizontal_XBONE";
+                    vertAxis = "Vertical_XBONE";
+                    horLook = "LookHorizontal_XBONE";
+                    vertLook = "LookVertical_XBONE";
+                    fire = "Fire_XBONE";
+                    reload = "Reload_XBONE";
+                    weaponSwitch = "WeaponSwitch_XBONE";
+                    interact = "Interact_XBONE";
+                    break;
+
 
                 default:
                     horAxis = "Horizontal_XBONE";

@@ -18,6 +18,7 @@ public class Weapon : MonoBehaviour, iHoldable
     public Animator weaponHolderAnim;
 
     public AmmoUI ammoUI;
+    public PlayerAudio playerAudio;
 
     [Header("Stats")]
     public string weaponName;
@@ -36,6 +37,7 @@ public class Weapon : MonoBehaviour, iHoldable
 
     [Header("Effects")]
     public ParticleSystem muzzleFlash;
+    public AudioClip fireAudio;
 
     public GameObject owner { get; private set; }
     public int crntClip { get; private set; }
@@ -59,6 +61,10 @@ public class Weapon : MonoBehaviour, iHoldable
             ShootMechanic();
             crntClip--;
             muzzleFlash.Play();
+            if (fireAudio != null)
+            {
+                playerAudio.PlayAttachedAudio(fireAudio);
+            }
             return true;
         }
 
@@ -151,6 +157,7 @@ public class Weapon : MonoBehaviour, iHoldable
     {
         // Does nothing right now, but if you need a weapon to do something when you pick it up. pop it here.
         Debug.Log("Weapon Pickup");
+        playerAudio = transform.GetComponentInParent<PlayerAudio>();
         return;
     }
 }

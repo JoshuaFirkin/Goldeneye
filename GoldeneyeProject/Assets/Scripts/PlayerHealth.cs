@@ -6,7 +6,14 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, iKillable
 {
     public PlayerController controller { get; private set; }
+    [Header("UI")]
     public HealthUI healthUI;
+
+    [Header("Audio")]
+    public AudioClip hitClip;
+    public AudioClip deathClip;
+    public AudioClip armourAudio;
+    public PlayerAudio playerAudio;
 
     public int armourPoints { get; private set; }
     public int hitPoints { get; private set; }
@@ -36,6 +43,7 @@ public class PlayerHealth : MonoBehaviour, iKillable
         }
 
         healthUI.UpdateArmour((float)armourPoints);
+        playerAudio.PlayAttachedAudio(armourAudio);
     }
 
 
@@ -75,6 +83,7 @@ public class PlayerHealth : MonoBehaviour, iKillable
         Debug.Log("Your HP is now " + hitPoints);
 
         healthUI.UpdateHealth((float)hitPoints);
+        playerAudio.PlayAttachedAudio(hitClip);
     }
 
 
@@ -84,5 +93,7 @@ public class PlayerHealth : MonoBehaviour, iKillable
         Debug.Log("DED");
         isDead = true;
         controller.DisableInput();
+
+        playerAudio.PlayAttachedAudio(deathClip);
     }
 }
