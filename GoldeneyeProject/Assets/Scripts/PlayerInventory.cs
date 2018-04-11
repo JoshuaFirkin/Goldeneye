@@ -24,6 +24,8 @@ public class PlayerInventory : MonoBehaviour
     private void Start()
     {
         inventoryWeapons = new List<Weapon>();
+
+
     }
 
     public void PickupWeapon(Weapon weapon)

@@ -15,9 +15,12 @@ public class PlayerController : MonoBehaviour
         public string reload;
         public string weaponSwitch;
         public string interact;
+        public List<string> maps;
 
-        public ControllerMap(RuntimePlatform platform)
+        public ControllerMap(RuntimePlatform platform, int playerNumber)
         {
+            maps = new List<string>();
+
             switch (platform)
             {
                 case RuntimePlatform.PS4:
@@ -66,6 +69,15 @@ public class PlayerController : MonoBehaviour
                     interact = "Interact_XBONE";
                     break;
             }
+
+            horAxis += ("_P" + playerNumber);
+            vertAxis += ("_P" + playerNumber);
+            horLook += ("_P" + playerNumber);
+            vertLook += ("_P" + playerNumber);
+            fire += ("_P" + playerNumber);
+            reload += ("_P" + playerNumber);
+            weaponSwitch += ("_P" + playerNumber);
+            interact += ("_P" + playerNumber);
         }
     }
 
@@ -87,9 +99,11 @@ public class PlayerController : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         inv = GetComponent<PlayerInventory>();
         anim = GetComponent<Animator>();
-        ctrlMap = new ControllerMap(RuntimePlatform.XboxOne);
+    }
 
-        Debug.Log(ctrlMap.horAxis);
+    public void AssignControllerMap(int playerNumber)
+    {
+        ctrlMap = new ControllerMap(RuntimePlatform.XboxOne, playerNumber);
     }
 
 
@@ -101,6 +115,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // Applying movement to the character.
+        Debug.Log(ctrlMap.horAxis);
         Vector3 horMovement = transform.right * Input.GetAxis(ctrlMap.horAxis);
         Vector3 verMovement = transform.forward * Input.GetAxis(ctrlMap.vertAxis);
 
