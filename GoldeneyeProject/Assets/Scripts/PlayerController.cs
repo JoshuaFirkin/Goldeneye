@@ -199,5 +199,6 @@ public class PlayerController : MonoBehaviour
     public void DisableInput()
     {
         inputDisabled = true;
+        motor.StopAllMovement();
     }
 }

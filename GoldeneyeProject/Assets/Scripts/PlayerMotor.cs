@@ -34,6 +34,12 @@ public class PlayerMotor : MonoBehaviour
         camRotation = rot;
     }
 
+    public void StopAllMovement()
+    {
+        velocity = Vector3.zero;
+        camRotation = Vector3.zero;
+    }
+
     void FixedUpdate()
     {
         if (velocity != Vector3.zero)
