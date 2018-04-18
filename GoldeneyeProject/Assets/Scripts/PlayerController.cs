@@ -103,7 +103,7 @@ public class PlayerController : MonoBehaviour
 
     public void AssignControllerMap(int playerNumber)
     {
-        ctrlMap = new ControllerMap(RuntimePlatform.XboxOne, playerNumber);
+        ctrlMap = new ControllerMap(RuntimePlatform.PS4, playerNumber);
     }
 
 
@@ -115,7 +115,6 @@ public class PlayerController : MonoBehaviour
         }
 
         // Applying movement to the character.
-        Debug.Log(ctrlMap.horAxis);
         Vector3 horMovement = transform.right * Input.GetAxis(ctrlMap.horAxis);
         Vector3 verMovement = transform.forward * Input.GetAxis(ctrlMap.vertAxis);
 

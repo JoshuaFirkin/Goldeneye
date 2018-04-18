@@ -16,14 +16,15 @@ public class SpawnPlayer : MonoBehaviour
             possibleSpawnPoints.Add(point);
         }
 
-        InstancePlayer(4);
+        //InstancePlayer(4);
     }
 
-    void InstancePlayer(int playerCount)
+    public List<GameObject> InstancePlayer(int playerCount)
     {
         if (playerCount <= 0)
-            return;
+            return null;
 
+        List<GameObject> players = new List<GameObject>();
         List<Camera> playerCams = new List<Camera>();
 
         for (int i = 0; i < playerCount; i++)
@@ -58,29 +59,10 @@ public class SpawnPlayer : MonoBehaviour
                         break;
                 }
             }
+
+            players.Add(player);
         }
 
-        //for (int i = 0; i < playerCams.Count; i++)
-        //{
-        //    Debug.Log(playerCams[i].transform.parent.name);
-        //    switch (i)
-        //    {
-        //        case 1:
-        //            playerCams[i].rect = new Rect(0.0f, 0.0f, 0.5f, 0.5f);
-        //            break;
-
-        //        case 2:
-        //            playerCams[i].rect = new Rect(0.5f, 0.0f, 0.5f, 0.5f);
-        //            break;
-
-        //        case 3:
-        //            playerCams[i].rect = new Rect(0.0f, 0.5f, 0.5f, 0.5f);
-        //            break;
-
-        //        case 4:
-        //            playerCams[i].rect = new Rect(0.0f, 0.0f, 0.5f, 0.5f);
-        //            break;
-        //    }
-        //}
+        return players;
     }
 }
