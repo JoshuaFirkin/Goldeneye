@@ -6,8 +6,8 @@ public class TestWeapon : Weapon
 {
     public Transform barrel;
 
-    private float timeToFire = 0.0f;
-    private bool canFire = true;
+    private float timeToF = 0.0f;
+    private bool canF = true;
 
     TestWeapon()
     {
@@ -21,9 +21,9 @@ public class TestWeapon : Weapon
 
     public override bool Fire()
     {
-        if (Time.time >= timeToFire && crntClip > 0 && canFire)
+        if (Time.time >= timeToF && crntClip > 0 && canF)
         {
-            timeToFire = Time.time + 1.0f / firingRate;
+            timeToF = Time.time + 1.0f / firingRate;
             ShootMechanic();
             muzzleFlash.Play();
             return true;
