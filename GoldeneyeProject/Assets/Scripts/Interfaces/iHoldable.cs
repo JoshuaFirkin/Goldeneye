@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface iHoldable
 {
-    void OnPickup();
+    void OnPickup(int _arrayPlace);
 }

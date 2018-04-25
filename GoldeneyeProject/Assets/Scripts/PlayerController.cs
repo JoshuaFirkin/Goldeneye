@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
     public float rotationSensitivity = 10.0f;
 
     private bool inputDisabled = false;
+    private int arrayPlace;
 
     void Start()
     {
@@ -103,9 +104,18 @@ public class PlayerController : MonoBehaviour
 
     public void AssignControllerMap(int playerNumber)
     {
-        ctrlMap = new ControllerMap(RuntimePlatform.PS4, playerNumber);
+        ctrlMap = new ControllerMap(Application.platform, playerNumber);
     }
 
+    public void SetID(int _arrayPlace)
+    {
+        arrayPlace = _arrayPlace;
+    }
+
+    public int GetID()
+    {
+        return arrayPlace;
+    }
 
     void Update()
     {
@@ -199,5 +209,10 @@ public class PlayerController : MonoBehaviour
     {
         inputDisabled = true;
         motor.StopAllMovement();
+    }
+
+    public void EnableInput()
+    {
+        inputDisabled = false;
     }
 }

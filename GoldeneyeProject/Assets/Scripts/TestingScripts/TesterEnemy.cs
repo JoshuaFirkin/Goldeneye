@@ -20,8 +20,9 @@ public class TesterEnemy : MonoBehaviour, iKillable
         }
     }
 
-    void iKillable.TakeDamage(int amountTaken)
+    bool iKillable.TakeDamage(int amountTaken)
     {
         Debug.Log("Test Damage Taken: " + amountTaken);
+        return false;
     }
 }

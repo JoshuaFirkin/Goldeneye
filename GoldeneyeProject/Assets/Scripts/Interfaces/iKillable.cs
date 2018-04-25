@@ -2,5 +2,5 @@
 
 public interface iKillable
 {
-    void TakeDamage(int amountTaken);
+    bool TakeDamage(int amountTaken);
 }

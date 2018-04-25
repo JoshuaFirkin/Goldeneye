@@ -39,7 +39,7 @@ public class Weapon : MonoBehaviour, iHoldable
     public ParticleSystem muzzleFlash;
     public AudioClip fireAudio;
 
-    public GameObject owner { get; private set; }
+    public int ownerArrayPlace { get; private set; }
     public int crntClip { get; private set; }
     public int crntInventory { get; private set; }
 
@@ -48,6 +48,7 @@ public class Weapon : MonoBehaviour, iHoldable
 
     void Awake()
     {
+        ownerArrayPlace = -1;
         crntClip = clipSize;
         crntInventory = inventorySize;
     }
@@ -88,7 +89,10 @@ public class Weapon : MonoBehaviour, iHoldable
             iKillable killable = hitInfo.collider.GetComponentInParent<iKillable>();
             if (killable != null)
             {
-                killable.TakeDamage(damage);
+                if (killable.TakeDamage(damage))
+                {
+                    GameMode.instance.PlayerKilled(ownerArrayPlace);
+                }
             }
 
             if (hitInfo.transform.tag != "Player")
@@ -153,11 +157,11 @@ public class Weapon : MonoBehaviour, iHoldable
     }
 
 
-    void iHoldable.OnPickup()
+    void iHoldable.OnPickup(int _arrayPlace)
     {
-        // Does nothing right now, but if you need a weapon to do something when you pick it up. pop it here.
-        Debug.Log("Weapon Pickup");
+        ownerArrayPlace = _arrayPlace;
         playerAudio = transform.GetComponentInParent<PlayerAudio>();
+        ammoUI = GetComponentInParent<PlayerInventory>().ammoUI;
         return;
     }
 }

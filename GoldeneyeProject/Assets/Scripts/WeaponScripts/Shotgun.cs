@@ -40,7 +40,10 @@ public class Shotgun : Weapon
                 iKillable killable = hitInfo.collider.GetComponentInParent<iKillable>();
                 if (killable != null)
                 {
-                    killable.TakeDamage(damagePerPellet);
+                    if (killable.TakeDamage(damagePerPellet))
+                    {
+                        GameMode.instance.PlayerKilled(ownerArrayPlace);
+                    }
                 }
 
                 if (hitInfo.transform.tag != "Player")

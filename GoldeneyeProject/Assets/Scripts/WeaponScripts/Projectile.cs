@@ -41,7 +41,11 @@ public class Projectile : MonoBehaviour
             if (killable != null)
             {
                 Debug.Log("Doing " + instDamage + " damage.");
-                killable.TakeDamage(instDamage);
+
+                if (killable.TakeDamage(instDamage))
+                {
+                    GameMode.instance.PlayerKilled(instigator.GetID());
+                }
             }
         }
 

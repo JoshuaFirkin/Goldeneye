@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, iKillable
 {
     public PlayerController controller { get; private set; }
+    public PlayerInventory inventory { get; private set; }
     [Header("UI")]
     public HealthUI healthUI;
 
@@ -29,6 +30,7 @@ public class PlayerHealth : MonoBehaviour, iKillable
     void Start()
     {
         controller = GetComponent<PlayerController>();
+        inventory = GetComponent<PlayerInventory>();
     }
 
     public void PickupArmour(int armourToGive)
@@ -47,17 +49,17 @@ public class PlayerHealth : MonoBehaviour, iKillable
     }
 
 
-    void iKillable.TakeDamage(int amountTaken)
+    bool iKillable.TakeDamage(int amountTaken)
     {
         if (isDead)
         {
-            return;
+            return false;
         }
 
         if (hitPoints <= 0)
         {
             Death();
-            return;
+            return false;
         }
 
         if (armourPoints > 0)
@@ -67,7 +69,6 @@ public class PlayerHealth : MonoBehaviour, iKillable
                 armourPoints -= amountTaken;
                 healthUI.UpdateArmour((float)armourPoints);
                 Debug.Log("Armour took " + (armourPoints - amountTaken) + " damage! Armour now at " + armourPoints);
-                return;
             }
             else
             {
@@ -84,16 +85,38 @@ public class PlayerHealth : MonoBehaviour, iKillable
 
         healthUI.UpdateHealth((float)hitPoints);
         playerAudio.PlayAttachedAudio(hitClip);
+
+        if (hitPoints <= 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 
     void Death()
     {
-        // Add End Game Here! Access GameMaster from here.
         Debug.Log("DED");
         isDead = true;
         controller.DisableInput();
 
         playerAudio.PlayAttachedAudio(deathClip);
+
+        // Add End Game Here! Access GameMaster from here.
+        GameMode.instance.PlayerDeath(controller.GetID());
+    }
+
+    public void Respawn()
+    {
+        Debug.Log("Respawned");
+        inventory.ResetWeapons();
+        controller.EnableInput();
+
+        isDead = false;
+        hitPoints = 100;
+        armourPoints = 0;
     }
 }

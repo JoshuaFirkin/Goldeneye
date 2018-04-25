@@ -15,25 +15,35 @@ public class Explosion : MonoBehaviour, iKillable
 
     public GameObject explosionEffect;
 
+    private bool hasExploded = false;
+
     //Functions same as health loss
-    void iKillable.TakeDamage(int amountTaken)
+    bool iKillable.TakeDamage(int amountTaken)
     {
-        
+        if (hasExploded)
+        {
+            return false;
+        }
+
         if (desHealth <= 0)
         {
             Debug.Log("Time to Die");
             Explode();
-            return;
+            return false;
         }
 
         desHealth -= amountTaken;
         Debug.Log("Des took " + amountTaken + " damage!");
         Debug.Log("Des HP is now " + desHealth);
+
+        return false;
     }
 
 
     public void Explode()
     {
+        hasExploded = true;
+
         Debug.Log("BOOM");
         //show effect
         Instantiate(explosionEffect, transform.position, transform.rotation);
@@ -49,7 +59,6 @@ public class Explosion : MonoBehaviour, iKillable
             }
         }
         //Destorys the object once exploded
-        Destroy(gameObject);
-       
+        Destroy(gameObject);      
     }
 }

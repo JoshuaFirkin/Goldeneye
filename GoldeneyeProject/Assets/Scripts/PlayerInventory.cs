@@ -9,6 +9,7 @@ public class PlayerInventory : MonoBehaviour
     public Transform weaponHolder;
     public AmmoUI ammoUI;
     public NotificationUI notifUI;
+    public PlayerController controller { get; private set; }
 
     [Header("Audio")]
     public AudioClip pickupClip;
@@ -23,9 +24,8 @@ public class PlayerInventory : MonoBehaviour
 
     private void Start()
     {
+        controller = GetComponent<PlayerController>();
         inventoryWeapons = new List<Weapon>();
-
-
     }
 
     public void PickupWeapon(Weapon weapon)
@@ -56,7 +56,7 @@ public class PlayerInventory : MonoBehaviour
         currentWeapon.GetComponent<Collider>().enabled = false;
 
         iHoldable weaponPickup = currentWeapon;
-        weaponPickup.OnPickup();
+        weaponPickup.OnPickup(controller.GetID());
 
         ammoUI.UpdateImage(currentWeapon.bulletImage);
         ammoUI.UpdateClipAndInventory(currentWeapon.crntClip, currentWeapon.crntInventory);
@@ -86,5 +86,17 @@ public class PlayerInventory : MonoBehaviour
         ammoUI.UpdateClipAndInventory(currentWeapon.crntClip, currentWeapon.crntInventory);
 
         playerAudio.PlayAttachedAudio(switchClip);
+    }
+
+    public void ResetWeapons()
+    {
+        currentWeapon = null;
+        inventoryWeapons.Clear();
+
+        Weapon[] children = weaponHolder.GetComponentsInChildren<Weapon>();
+        foreach (Weapon child in children)
+        {
+            DestroyImmediate(child.gameObject);
+        }
     }
 }

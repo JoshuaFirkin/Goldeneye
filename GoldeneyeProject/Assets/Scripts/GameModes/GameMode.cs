@@ -10,11 +10,14 @@ public class GameMode : MonoBehaviour
     {
         instance = this;
     }
-#endregion
+    #endregion
 
     public class PlayerLeaderboard
     {
         public GameObject player { get; private set; }
+        public PlayerController controller { get; private set; }
+        public PlayerHealth health { get; private set; }
+        public PlayerInventory inventory { get; private set; }
         public int playerID { get; private set; }
         public int kills { get; private set; }
         public int deaths { get; private set; }
@@ -23,6 +26,10 @@ public class GameMode : MonoBehaviour
         {
             player = _player;
             playerID = _id;
+
+            controller = player.GetComponent<PlayerController>();
+            health = player.GetComponent<PlayerHealth>();
+            inventory = player.GetComponent<PlayerInventory>();
 
             kills = 0;
             deaths = 0;
@@ -55,14 +62,17 @@ public class GameMode : MonoBehaviour
     protected int killLead = 0;
     protected bool gameOver = false;
 
-	protected void Start ()
+	protected virtual void Start ()
     {
         spawner = GetComponent<SpawnPlayer>();
         players = spawner.InstancePlayer(playerCount);
 
         for (int i = 0; i < players.Count; i++)
         {
-            leaderboard.Add(new PlayerLeaderboard(players[i], i + 1));
+            int id = i + 1;
+
+            leaderboard.Add(new PlayerLeaderboard(players[i], id));
+            players[i].GetComponent<PlayerController>().SetID(i);
             Debug.Log(leaderboard[i].playerID);
         }
 
@@ -70,13 +80,13 @@ public class GameMode : MonoBehaviour
 	}
 	
 
-    protected void StartGame()
+    protected virtual void StartGame()
     {
         StartCoroutine(TimerCountdown());
     }
 
 
-    protected IEnumerator TimerCountdown()
+    protected virtual IEnumerator TimerCountdown()
     {
         while (!gameOver)
         {
@@ -100,7 +110,8 @@ public class GameMode : MonoBehaviour
         }
     }
 
-    public void PlayerKilled(int killerID)
+
+    public virtual void PlayerKilled(int killerID)
     {
         switch (useKillsToWin)
         {
@@ -115,26 +126,53 @@ public class GameMode : MonoBehaviour
                 leaderboard[killerID].IncreaseKill();
                 break;
         }
+
+        Debug.Log("Player " + (killerID + 1) + " has " + leaderboard[killerID].kills + " kills");
     }
 
 
-    public void PlayerDeath(int deathID)
+    public virtual void PlayerDeath(int deathID)
     {
         leaderboard[deathID].IncreaseDeath();
+        leaderboard[deathID].health.Respawn();
+        spawner.MovePlayerToPoint(leaderboard[deathID].player.transform);
     }
 
 
-    protected void EndGame()
+    public PlayerLeaderboard FindPlayerByID(int id)
+    {
+        foreach (PlayerLeaderboard pLeaderboard in leaderboard)
+        {
+            if (pLeaderboard.playerID == id)
+            {
+                return pLeaderboard;
+            }
+        }
+
+        return null;
+    }
+
+
+    protected virtual void EndGame()
     {
         Debug.Log("GAME OVER");
         gameOver = true;
 
-        foreach (GameObject player in players)
+        foreach (GameObject playerObj in players)
         {
-            PlayerController controller = player.GetComponent<PlayerController>();
+            PlayerController controller = playerObj.GetComponent<PlayerController>();
             controller.DisableInput();
         }
 
-        // @TODO: Add player info here.
+        int mostKills = 0;
+        PlayerLeaderboard winningPlayer;
+        foreach (PlayerLeaderboard playerLeaderboard in leaderboard)
+        {
+            if (playerLeaderboard.kills > mostKills)
+            {
+                mostKills = playerLeaderboard.kills;
+                winningPlayer = playerLeaderboard;
+            }
+        }
     }
 }

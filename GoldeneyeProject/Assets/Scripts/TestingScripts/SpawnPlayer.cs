@@ -65,4 +65,10 @@ public class SpawnPlayer : MonoBehaviour
 
         return players;
     }
+
+
+    public void MovePlayerToPoint(Transform player)
+    {
+        player.position = new Vector3(possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.x, transform.position.y + 0.5f, possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.z);
+    }
 }
