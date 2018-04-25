@@ -94,8 +94,14 @@ public class PlayerInventory : MonoBehaviour
         inventoryWeapons.Clear();
 
         Weapon[] children = weaponHolder.GetComponentsInChildren<Weapon>();
+
         foreach (Weapon child in children)
         {
+            if (child.specialWeapon)
+            {
+                GoldenGun_GameMode.instance.SpawnGoldenGun();
+            }
+
             DestroyImmediate(child.gameObject);
         }
     }

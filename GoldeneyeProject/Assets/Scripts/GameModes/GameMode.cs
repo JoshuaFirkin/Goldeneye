@@ -83,7 +83,7 @@ public class GameMode : MonoBehaviour
             Debug.Log(leaderboard[i].playerID);
         }
 
-        StartCoroutine(TimerCountdown());
+        StartGame();
 	}
 	
 
@@ -181,5 +181,11 @@ public class GameMode : MonoBehaviour
                 winningPlayer = playerLeaderboard;
             }
         }
+    }
+
+    public void SpawnGoldenGun()
+    {
+        spawner.SpawnGoldenGun();
+        return;
     }
 }

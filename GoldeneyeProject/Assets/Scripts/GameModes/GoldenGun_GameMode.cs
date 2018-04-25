@@ -17,10 +17,14 @@ public class GoldenGun_GameMode : GameMode
         killsToWin = 20;
     }
 
+    protected override void StartGame()
+    {
+        base.StartGame();
+        spawner.SpawnGoldenGun();
+    }
 
     public override void PlayerKilled(int killerID, bool special = false)
     {
-        Debug.Log("Hit");
         if (special)
         {
             switch (useSpecialKills)

@@ -5,6 +5,7 @@ using UnityEngine;
 public class SpawnPlayer : MonoBehaviour
 {
     public GameObject playerPrefab;
+    public GameObject goldenGunPrefab;
     public Transform[] spawnPoints;
 
     private List<Transform> possibleSpawnPoints = new List<Transform>();
@@ -70,5 +71,11 @@ public class SpawnPlayer : MonoBehaviour
     public void MovePlayerToPoint(Transform player)
     {
         player.position = new Vector3(possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.x, transform.position.y + 0.5f, possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.z);
+    }
+
+    public void SpawnGoldenGun()
+    {
+        Vector3 spawnPos = new Vector3(possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.x, 1.0f, possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.z);
+        Instantiate(goldenGunPrefab, spawnPos, Quaternion.identity);
     }
 }

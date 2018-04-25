@@ -12,6 +12,7 @@ public class GoldenGun : Weapon
         clipSize = 1;
         inventorySize = 30;
         reloadTime = 2;
+        specialWeapon = true;
     }
 
 

@@ -39,9 +39,10 @@ public class Weapon : MonoBehaviour, iHoldable
     public ParticleSystem muzzleFlash;
     public AudioClip fireAudio;
 
-    public int ownerArrayPlace { get; private set; }
-    public int crntClip { get; private set; }
-    public int crntInventory { get; private set; }
+    public int ownerArrayPlace { get; protected set; }
+    public int crntClip { get; protected set; }
+    public int crntInventory { get; protected set; }
+    public bool specialWeapon { get; protected set; }
 
     private float timeToFire = 0.0f;
     private bool canFire = true;
@@ -139,8 +140,6 @@ public class Weapon : MonoBehaviour, iHoldable
         canFire = true;
         ammoUI.UpdateClipAndInventory(crntClip, crntInventory);
         OnReloadFinished();
-
-        Debug.Log(crntClip + " / " + crntInventory);
     }
 
 
