@@ -88,6 +88,7 @@ public class PlayerHealth : MonoBehaviour, iKillable
 
         if (hitPoints <= 0)
         {
+            Death();
             return true;
         }
         else

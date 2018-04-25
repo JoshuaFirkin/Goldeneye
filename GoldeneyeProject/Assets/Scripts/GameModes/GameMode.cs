@@ -20,6 +20,7 @@ public class GameMode : MonoBehaviour
         public PlayerInventory inventory { get; private set; }
         public int playerID { get; private set; }
         public int kills { get; private set; }
+        public int specialKills { get; private set; }
         public int deaths { get; private set; }
 
         public PlayerLeaderboard(GameObject _player, int _id)
@@ -32,12 +33,18 @@ public class GameMode : MonoBehaviour
             inventory = player.GetComponent<PlayerInventory>();
 
             kills = 0;
+            specialKills = 0;
             deaths = 0;
         }
 
         public int IncreaseKill()
         {
             return kills++;
+        }
+
+        public int IncreaseSpecialKill()
+        {
+            return specialKills++;
         }
 
         public int IncreaseDeath()
@@ -111,7 +118,7 @@ public class GameMode : MonoBehaviour
     }
 
 
-    public virtual void PlayerKilled(int killerID)
+    public virtual void PlayerKilled(int killerID, bool special = false)
     {
         switch (useKillsToWin)
         {

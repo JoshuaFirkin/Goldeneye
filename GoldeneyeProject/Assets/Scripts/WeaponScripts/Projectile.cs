@@ -36,7 +36,6 @@ public class Projectile : MonoBehaviour
 
         foreach (Collider collider in hitColliders)
         {
-            Debug.Log("Looping");
             iKillable killable = collider.GetComponentInParent<iKillable>();
             if (killable != null)
             {
@@ -56,7 +55,7 @@ public class Projectile : MonoBehaviour
 
     public void SetInstigator(GameObject _player, int _damage)
     {
-        instigator = _player.GetComponent<PlayerController>();
+        instigator = _player.GetComponentInParent<PlayerController>();
         instDamage = _damage;
     }
 
