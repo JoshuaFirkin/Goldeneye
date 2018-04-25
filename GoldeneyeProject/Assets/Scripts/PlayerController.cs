@@ -93,6 +93,7 @@ public class PlayerController : MonoBehaviour
     public float rotationSensitivity = 10.0f;
 
     private bool inputDisabled = false;
+    private GameObject GFX;
     private int arrayPlace;
 
     void Start()
@@ -100,6 +101,8 @@ public class PlayerController : MonoBehaviour
         motor = GetComponent<PlayerMotor>();
         inv = GetComponent<PlayerInventory>();
         anim = GetComponent<Animator>();
+
+        GFX = transform.Find("swat@Idle").gameObject;
     }
 
     public void AssignControllerMap(int playerNumber)
@@ -110,6 +113,11 @@ public class PlayerController : MonoBehaviour
     public void SetID(int _arrayPlace)
     {
         arrayPlace = _arrayPlace;
+
+        string layerString = "Player_" + (arrayPlace + 1);
+        GFX.layer = arrayPlace + 10;
+
+        cam.cullingMask = arrayPlace + 10;
     }
 
     public int GetID()
