@@ -23,7 +23,7 @@ public class CrosshairInteract : MonoBehaviour {
 	void Start ()
     {
         AttrText = Attributes.GetComponent<Text>();
-
+        
         switch (Application.platform)
         {
             case RuntimePlatform.PS4:
@@ -137,7 +137,10 @@ public class CrosshairInteract : MonoBehaviour {
 
     void StartGame()
     {
-
+        PlayerPrefs.SetInt("GamemodeKey", gamemode);
+        PlayerPrefs.SetInt("PlayerCountKey", playerNumber);
+        PlayerPrefs.SetInt("LevelKey", levelNumber);
+        //Add Scene Transition Here
     }
 
     void Back()
