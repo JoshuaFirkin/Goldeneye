@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
     private Animator anim;
     private ControllerMap ctrlMap;
 
+    public Animator GFXAnim;
     public AmmoUI ammoUI;
     public Camera cam;
 
@@ -96,6 +97,11 @@ public class PlayerController : MonoBehaviour
     private GameObject GFX;
     private int arrayPlace;
 
+    void Awake()
+    {
+
+    }
+
     void Start()
     {
         motor = GetComponent<PlayerMotor>();
@@ -103,6 +109,7 @@ public class PlayerController : MonoBehaviour
         anim = GetComponent<Animator>();
 
         GFX = transform.Find("swat@Idle").gameObject;
+        GFXAnim = GFX.GetComponent<Animator>();
     }
 
     public void AssignControllerMap(int playerNumber)

@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerMotor : MonoBehaviour
 {
     private Rigidbody rb;
+    private PlayerController controller;
 
     [SerializeField]
     private Camera cam;
@@ -19,7 +20,7 @@ public class PlayerMotor : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        anim = transform.Find("swat@Idle").GetComponent<Animator>();
+        controller = GetComponent<PlayerController>();
     }
 
     public void AddMovement(Vector3 vel)
@@ -48,11 +49,11 @@ public class PlayerMotor : MonoBehaviour
         if (velocity != Vector3.zero)
         {
             rb.MovePosition(rb.position + (velocity * Time.fixedDeltaTime));
-            anim.SetFloat("velocity", velocity.magnitude);
+            controller.GFXAnim.SetFloat("velocity", velocity.magnitude);
         }
         else
         {
-            anim.SetFloat("velocity", 0);
+            controller.GFXAnim.SetFloat("velocity", 0);
         }
 
         if (rotation != Vector3.zero)

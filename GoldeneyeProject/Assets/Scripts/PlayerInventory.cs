@@ -64,6 +64,8 @@ public class PlayerInventory : MonoBehaviour
         notifUI.WeaponPickup(currentWeapon.weaponName);
 
         playerAudio.PlayAttachedAudio(pickupClip);
+
+        controller.GFXAnim.SetInteger("weapon", currentWeapon.weaponID);
     }
 
 
