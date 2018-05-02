@@ -113,11 +113,6 @@ public class PlayerController : MonoBehaviour
     public void SetID(int _arrayPlace)
     {
         arrayPlace = _arrayPlace;
-
-        string layerString = "Player_" + (arrayPlace + 1);
-        GFX.layer = arrayPlace + 10;
-
-        cam.cullingMask = arrayPlace + 10;
     }
 
     public int GetID()

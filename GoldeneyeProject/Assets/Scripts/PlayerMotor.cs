@@ -10,6 +10,8 @@ public class PlayerMotor : MonoBehaviour
     [SerializeField]
     private Camera cam;
 
+    public Animator anim;
+
     private Vector3 velocity = Vector3.zero;
     private Vector3 rotation = Vector3.zero;
     private Vector3 camRotation = Vector3.zero;
@@ -17,6 +19,7 @@ public class PlayerMotor : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        anim = transform.Find("swat@Idle").GetComponent<Animator>();
     }
 
     public void AddMovement(Vector3 vel)
@@ -45,6 +48,11 @@ public class PlayerMotor : MonoBehaviour
         if (velocity != Vector3.zero)
         {
             rb.MovePosition(rb.position + (velocity * Time.fixedDeltaTime));
+            anim.SetFloat("velocity", velocity.magnitude);
+        }
+        else
+        {
+            anim.SetFloat("velocity", 0);
         }
 
         if (rotation != Vector3.zero)

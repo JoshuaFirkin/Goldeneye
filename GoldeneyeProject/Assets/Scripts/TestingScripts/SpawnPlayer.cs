@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpawnPlayer : MonoBehaviour
 {
-    public GameObject playerPrefab;
+    public GameObject[] playerPrefabs;
     public GameObject goldenGunPrefab;
     public Transform[] spawnPoints;
 
@@ -33,7 +33,7 @@ public class SpawnPlayer : MonoBehaviour
             // PLACEHOLDER SPAWN POSITION
             Vector3 spawnPos = new Vector3(Random.Range(-12.5f, 12.5f), 1.0f, Random.Range(-8.0f, 12.5f));
 
-            GameObject player = Instantiate(playerPrefab, spawnPos, Quaternion.identity);
+            GameObject player = Instantiate(playerPrefabs[i], spawnPos, Quaternion.identity);
             player.name = "Player_" + (i + 1);
             player.GetComponentInChildren<PlayerController>().AssignControllerMap(i + 1);
 

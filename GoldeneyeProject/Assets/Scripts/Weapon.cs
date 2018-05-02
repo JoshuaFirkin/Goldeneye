@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,6 +22,7 @@ public class Weapon : MonoBehaviour, iHoldable
 
     [Header("Stats")]
     public string weaponName;
+    public int weaponID = 2;
     public Vector3 weaponOffset = Vector3.zero;
     public Sprite bulletImage;
     public float firingRate = 1.0f;
