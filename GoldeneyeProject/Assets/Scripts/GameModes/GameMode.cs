@@ -89,6 +89,7 @@ public class GameMode : MonoBehaviour
 
     protected virtual void StartGame()
     {
+        spawner.SpawnWeaponsNormally();
         StartCoroutine(TimerCountdown());
     }
 

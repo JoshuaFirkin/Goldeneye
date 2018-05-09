@@ -7,6 +7,7 @@ public class GameModeInitialiser : MonoBehaviour
     int gameMode = 1;
     int playerCount = 1;
 
+
     private void Start()
     {
         gameMode = PlayerPrefs.GetInt("GamemodeKey");
@@ -18,6 +19,7 @@ public class GameModeInitialiser : MonoBehaviour
 
         CreateGameMode();
     }
+
 
     void CreateGameMode()
     {
@@ -47,7 +49,5 @@ public class GameModeInitialiser : MonoBehaviour
         {
             mode.playerCount = playerCount;
         }
-
-
     }
 }

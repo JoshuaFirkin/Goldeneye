@@ -28,8 +28,6 @@ public class SpawnPlayer : MonoBehaviour
         {
             possibleSpawnPoints.Add(point);
         }
-
-        //InstancePlayer(4);
     }
 
     public List<GameObject> InstancePlayer(int playerCount)
@@ -42,7 +40,6 @@ public class SpawnPlayer : MonoBehaviour
 
         for (int i = 0; i < playerCount; i++)
         {
-            // PLACEHOLDER SPAWN POSITION
             Transform point = spawnPoints[Random.Range(0, spawnPoints.Length)];
             Vector3 spawnPos = new Vector3(point.position.x, point.position.y, point.position.z);
 
@@ -131,8 +128,25 @@ public class SpawnPlayer : MonoBehaviour
 
     public void SpawnGoldenGun()
     {
-        Vector3 spawnPos = new Vector3(possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.x, 1.0f, possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.z);
+        Vector3 spawnPos = new Vector3(weaponSpawnPoints[Random.Range(0, weaponSpawnPoints.Length)].position.x, 1.0f, weaponSpawnPoints[Random.Range(0, weaponSpawnPoints.Length)].position.z);
+        GameObject obj = CheckAvailableWeaponSpawnPoint(spawnPos);
+
+        if (obj != null)
+        {
+            Destroy(obj);
+        }
+
         Instantiate(goldenGunPrefab, spawnPos, Quaternion.identity);
+    }
+
+
+    public void SpawnWeaponsNormally()
+    {
+        foreach (Transform point in weaponSpawnPoints)
+        {
+            weaponToSpawn = weaponTypes[Random.Range(0, weaponTypes.Length)];
+            Instantiate(weaponToSpawn, point.position, point.rotation);
+        }
     }
 
 
@@ -155,5 +169,26 @@ public class SpawnPlayer : MonoBehaviour
         {
             Instantiate(weaponToSpawn, point.position, point.rotation);
         }
+    }
+
+
+    GameObject CheckAvailableWeaponSpawnPoint(Vector3 trans)
+    {
+        Weapon[] weapons = GameObject.FindObjectsOfType<Weapon>();
+
+        if (weapons == null)
+        {
+            return null;
+        }
+
+        foreach (Weapon weapon in weapons)
+        {
+            if (Vector3.Distance(weapon.transform.position, trans) <= float.Epsilon)
+            {
+                return weapon.gameObject;
+            }
+        }
+
+        return null;
     }
 }
