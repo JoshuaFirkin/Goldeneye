@@ -2,11 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum WeaponType
+{
+    RIFLE,
+    SHOTGUN,
+    ROCKET_LAUNCHER,
+    PISTOL,
+}
+
 public class SpawnPlayer : MonoBehaviour
 {
     public GameObject[] playerPrefabs;
     public GameObject goldenGunPrefab;
     public Transform[] spawnPoints;
+    public Transform[] weaponSpawnPoints;
+    public GameObject[] weaponTypes;
+
+    private GameObject weaponToSpawn;
 
     private List<Transform> possibleSpawnPoints = new List<Transform>();
 
@@ -31,7 +43,8 @@ public class SpawnPlayer : MonoBehaviour
         for (int i = 0; i < playerCount; i++)
         {
             // PLACEHOLDER SPAWN POSITION
-            Vector3 spawnPos = new Vector3(Random.Range(-12.5f, 12.5f), 1.0f, Random.Range(-8.0f, 12.5f));
+            Transform point = spawnPoints[Random.Range(0, spawnPoints.Length)];
+            Vector3 spawnPos = new Vector3(point.position.x, point.position.y, point.position.z);
 
             GameObject player = Instantiate(playerPrefabs[i], spawnPos, Quaternion.identity);
             player.name = "Player_" + (i + 1);
@@ -41,22 +54,65 @@ public class SpawnPlayer : MonoBehaviour
 
             if (cam != null)
             {
-                switch (i)
+                switch (playerCount)
                 {
-                    case 0:
-                        cam.rect = new Rect(0.0f, 0.5f, 0.5f, 0.5f);
+                    case 1:
+                        cam.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
                         break;
 
-                    case 1:
-                        cam.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
-                        break;
 
                     case 2:
-                        cam.rect = new Rect(0.0f, 0.0f, 0.5f, 0.5f);
+                        switch (i)
+                        {
+                            case 0:
+                                cam.rect = new Rect(0.0f, 0.5f, 1.0f, 0.5f);
+                                break;
+
+                            case 1:
+                                cam.rect = new Rect(0.0f, 0.0f, 1.0f, 0.5f);
+                                break;
+                        }
                         break;
 
+
                     case 3:
-                        cam.rect = new Rect(0.5f, 0.0f, 0.5f, 0.5f);
+                        switch (i)
+                        {
+                            case 0:
+                                cam.rect = new Rect(0.0f, 0.5f, 0.5f, 0.5f);
+                                break;
+
+                            case 1:
+                                cam.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+                                break;
+
+                            case 2:
+                                cam.rect = new Rect(0.0f, 0.0f, 1.0f, 0.5f);
+                                break;
+                        }
+                        break;
+
+
+                    case 4:
+                        switch (i)
+                        {
+                            case 0:
+                                cam.rect = new Rect(0.0f, 0.5f, 0.5f, 0.5f);
+                                break;
+
+                            case 1:
+                                cam.rect = new Rect(0.5f, 0.5f, 0.5f, 0.5f);
+                                break;
+
+                            case 2:
+                                cam.rect = new Rect(0.0f, 0.0f, 0.5f, 0.5f);
+                                break;
+
+                            case 3:
+                                cam.rect = new Rect(0.5f, 0.0f, 0.5f, 0.5f);
+                                break;
+                        }
+
                         break;
                 }
             }
@@ -77,5 +133,27 @@ public class SpawnPlayer : MonoBehaviour
     {
         Vector3 spawnPos = new Vector3(possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.x, 1.0f, possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.z);
         Instantiate(goldenGunPrefab, spawnPos, Quaternion.identity);
+    }
+
+
+    public void SpawnWeaponOfType(WeaponType type)
+    {
+        switch (type)
+        {
+            case WeaponType.ROCKET_LAUNCHER:
+                foreach (GameObject weap in weaponTypes)
+                {
+                    if (weap.GetComponent<RocketLauncher>() != null)
+                    {
+                        weaponToSpawn = weap;
+                    }
+                }
+                break;
+        }
+
+        foreach (Transform point in weaponSpawnPoints)
+        {
+            Instantiate(weaponToSpawn, point.position, point.rotation);
+        }
     }
 }

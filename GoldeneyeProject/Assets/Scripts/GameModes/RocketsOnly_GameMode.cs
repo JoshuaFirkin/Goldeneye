@@ -13,4 +13,10 @@ public class RocketsOnly_GameMode : GameMode
         useKillsToWin = true;
         killsToWin = 20;
     }
+
+    protected override void StartGame()
+    {
+        spawner.SpawnWeaponOfType(WeaponType.ROCKET_LAUNCHER);
+        base.StartGame();
+    }
 }

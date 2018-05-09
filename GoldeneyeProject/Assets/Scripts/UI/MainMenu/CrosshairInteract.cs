@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class CrosshairInteract : MonoBehaviour {
 
@@ -10,6 +11,7 @@ public class CrosshairInteract : MonoBehaviour {
     int CurrentButton;
     public int playerNumber = 2;
     public int levelNumber = 1;
+    public string levelKey = "Archives";
     public string levelName = "Archives(Ciaran)";
     public int gamemode = 1;
     public string gamemodeName = "Free-for-all";
@@ -87,26 +89,32 @@ public class CrosshairInteract : MonoBehaviour {
         {
             case 1:
                 levelName = "Temple(Josh)";
+                levelKey = "Temple";
                 levelNumber++;
                 break;
             case 2:
                 levelName = "Complex(Matt)";
+                levelKey = "Complex";
                 levelNumber++;
                 break;
             case 3:
                 levelName = "Library(Mitch)";
+                levelKey = "Library";
                 levelNumber++;
                 break;
             case 4:
                 levelName = "Basement(Harry)";
+                levelKey = "Basement";
                 levelNumber++;
                 break;
             case 5:
                 levelName = "Archives(Ciaran)";
+                levelKey = "Archives";
                 levelNumber = 1;
                 break;
             default:
                 levelName = "Archives(Ciaran)";
+                levelKey = "Archives";
                 levelNumber++;
                 break;
         }
@@ -130,7 +138,7 @@ public class CrosshairInteract : MonoBehaviour {
                 break;
             default:
                 gamemodeName = "Free-for-all";
-                gamemode++;
+                gamemode = 0;
                 break;
         }
     }
@@ -139,8 +147,10 @@ public class CrosshairInteract : MonoBehaviour {
     {
         PlayerPrefs.SetInt("GamemodeKey", gamemode);
         PlayerPrefs.SetInt("PlayerCountKey", playerNumber);
-        PlayerPrefs.SetInt("LevelKey", levelNumber);
+        PlayerPrefs.SetString("LevelKey", levelKey);
         //Add Scene Transition Here
+
+        SceneManager.LoadScene(levelKey);
     }
 
     void Back()

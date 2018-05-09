@@ -99,7 +99,8 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-
+        GFX = transform.Find("swat@Idle").gameObject;
+        GFXAnim = GFX.GetComponent<Animator>();
     }
 
     void Start()
@@ -108,8 +109,8 @@ public class PlayerController : MonoBehaviour
         inv = GetComponent<PlayerInventory>();
         anim = GetComponent<Animator>();
 
-        GFX = transform.Find("swat@Idle").gameObject;
-        GFXAnim = GFX.GetComponent<Animator>();
+        //GFX = transform.Find("swat@Idle").gameObject;
+        //GFXAnim = GFX.GetComponent<Animator>();
     }
 
     public void AssignControllerMap(int playerNumber)
