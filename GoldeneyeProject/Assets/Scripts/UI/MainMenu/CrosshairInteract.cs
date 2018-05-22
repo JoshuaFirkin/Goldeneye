@@ -89,7 +89,7 @@ public class CrosshairInteract : MonoBehaviour {
         {
             case 1:
                 levelName = "Temple(Josh)";
-                levelKey = "Temple";
+                levelKey = "Temple_Josh";
                 levelNumber++;
                 break;
             case 2:
