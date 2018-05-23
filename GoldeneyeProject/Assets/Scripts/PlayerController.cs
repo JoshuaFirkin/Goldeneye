@@ -57,16 +57,15 @@ public class PlayerController : MonoBehaviour
                     interact = "Interact_XBONE";
                     break;
 
-
                 default:
-                    horAxis = "Horizontal_XBONE";
-                    vertAxis = "Vertical_XBONE";
-                    horLook = "LookHorizontal_XBONE";
-                    vertLook = "LookVertical_XBONE";
-                    fire = "Fire_XBONE";
-                    reload = "Reload_XBONE";
-                    weaponSwitch = "WeaponSwitch_XBONE";
-                    interact = "Interact_XBONE";
+                    horAxis = "Horizontal_PS4";
+                    vertAxis = "Vertical_PS4";
+                    horLook = "LookHorizontal_PS4";
+                    vertLook = "LookVertical_PS4";
+                    fire = "Fire_PS4";
+                    reload = "Reload_PS4";
+                    weaponSwitch = "WeaponSwitch_PS4";
+                    interact = "Interact_PS4";
                     break;
             }
 
