@@ -65,6 +65,7 @@ public class GameMode : MonoBehaviour
     [SerializeField] protected int killsToWin = 10;
 
     protected SpawnPlayer spawner;
+    protected TimeKeeper timeKeeper;
 
     protected int killLead = 0;
     protected bool gameOver = false;
@@ -72,6 +73,7 @@ public class GameMode : MonoBehaviour
 	protected virtual void Start ()
     {
         spawner = GetComponent<SpawnPlayer>();
+        timeKeeper = GetComponent<TimeKeeper>();
         players = spawner.InstancePlayer(playerCount);
 
         for (int i = 0; i < players.Count; i++)
@@ -114,7 +116,10 @@ public class GameMode : MonoBehaviour
             yield return new WaitForSeconds(1);
             timerSeconds--;
 
-            // @TODO: ADD TIMER UI HERE.
+            if (timeKeeper != null)
+            {
+                timeKeeper.DisplayTime(timerMins, timerSeconds);
+            }
         }
     }
 
