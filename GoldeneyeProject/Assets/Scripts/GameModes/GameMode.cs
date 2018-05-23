@@ -173,7 +173,7 @@ public class GameMode : MonoBehaviour
         }
 
         int mostKills = 0;
-        PlayerLeaderboard winningPlayer;
+        PlayerLeaderboard winningPlayer = null;
         foreach (PlayerLeaderboard playerLeaderboard in leaderboard)
         {
             if (playerLeaderboard.kills > mostKills)
@@ -182,11 +182,27 @@ public class GameMode : MonoBehaviour
                 winningPlayer = playerLeaderboard;
             }
         }
+
+        SaveScores(winningPlayer.playerID);
     }
 
     public void SpawnGoldenGun()
     {
         spawner.SpawnGoldenGun();
         return;
+    }
+
+    void SaveScores(int winnerID)
+    {
+        PlayerPrefs.SetInt("winner", winnerID);
+
+        for (int i = 0; i < leaderboard.Count; i++)
+        {
+            string id = "P" + leaderboard[i].playerID.ToString() + "_";
+
+            PlayerPrefs.SetInt(id + "kills", leaderboard[i].kills);
+            PlayerPrefs.SetInt(id + "deaths", leaderboard[i].deaths);
+            PlayerPrefs.SetInt(id + "specials", leaderboard[i].specialKills);
+        }
     }
 }

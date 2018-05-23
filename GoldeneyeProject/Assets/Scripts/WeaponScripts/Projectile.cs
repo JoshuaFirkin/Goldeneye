@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Projectile : MonoBehaviour
 {
+    public Transform ps;
+
     PlayerController instigator;
     int instDamage;
 
@@ -48,7 +50,7 @@ public class Projectile : MonoBehaviour
             }
         }
 
-        
+        Instantiate(ps, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 

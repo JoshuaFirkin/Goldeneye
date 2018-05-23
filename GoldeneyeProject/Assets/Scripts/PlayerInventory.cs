@@ -30,6 +30,18 @@ public class PlayerInventory : MonoBehaviour
 
     public void PickupWeapon(Weapon weapon)
     {
+        if (inventoryWeapons.Count > 0)
+        {
+            foreach (Weapon weap in inventoryWeapons)
+            {
+                if (weapon.GetType() == weap.GetType())
+                {
+                    Debug.Log("Weapon already in inventory");
+                    return;
+                }
+            }
+        }
+
         inventoryWeapons.Add(weapon);
 
         if (currentWeapon != null)
