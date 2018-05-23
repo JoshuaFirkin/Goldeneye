@@ -155,8 +155,7 @@ public class CrosshairInteract : MonoBehaviour {
 
     void Back()
     {
-        MenuOverlay.gameObject.SetActive(true);
-        gameObject.SetActive(false);
+        SceneManager.LoadScene(0);
     }
 
     void UpdateAttributes()
