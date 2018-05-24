@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameMode : MonoBehaviour
 {
@@ -74,6 +75,7 @@ public class GameMode : MonoBehaviour
     {
         spawner = GetComponent<SpawnPlayer>();
         timeKeeper = GetComponent<TimeKeeper>();
+        timeKeeper.DisplayTime(timerMins, timerSeconds);
         players = spawner.InstancePlayer(playerCount);
 
         for (int i = 0; i < players.Count; i++)
@@ -188,7 +190,15 @@ public class GameMode : MonoBehaviour
             }
         }
 
-        SaveScores(winningPlayer.playerID);
+        SaveScores();
+        StartCoroutine(SceneTransition());
+    }
+
+    protected virtual IEnumerator SceneTransition()
+    {
+        timeKeeper.DisplayEndGame();
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene("Scoreboard");
     }
 
     public void SpawnGoldenGun()
@@ -197,9 +207,9 @@ public class GameMode : MonoBehaviour
         return;
     }
 
-    void SaveScores(int winnerID)
+    void SaveScores()
     {
-        PlayerPrefs.SetInt("winner", winnerID);
+        //PlayerPrefs.SetInt("winner", winnerID);
 
         for (int i = 0; i < leaderboard.Count; i++)
         {
