@@ -4,8 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class CrosshairInteract : MonoBehaviour
-{
+public class CrosshairInteract : MonoBehaviour {
+
     public Sprite normal;
     public Sprite highlight;
     int CurrentButton;
@@ -17,7 +17,6 @@ public class CrosshairInteract : MonoBehaviour
     public string gamemodeName = "Free-for-all";
     public GameObject MenuOverlay;
     public GameObject Attributes;
-    public Text loadingText;
     Text AttrText;
 
     private string submit;
@@ -151,8 +150,7 @@ public class CrosshairInteract : MonoBehaviour
         PlayerPrefs.SetString("LevelKey", levelKey);
         //Add Scene Transition Here
 
-        //SceneManager.LoadScene(levelKey);
-        StartCoroutine(LoadKeyScene());
+        SceneManager.LoadScene(levelKey);
     }
 
     void Back()
@@ -178,19 +176,5 @@ public class CrosshairInteract : MonoBehaviour
     {
         other.GetComponent<Image>().sprite = normal;
         CurrentButton = 0;
-    }
-
-
-    IEnumerator LoadKeyScene()
-    {
-        string levelString = PlayerPrefs.GetString("LevelKey");
-        AsyncOperation async = SceneManager.LoadSceneAsync(levelString);
-
-        loadingText.text = "Loading...";
-
-        while (!async.isDone)
-        {
-            yield return null;
-        }
     }
 }
