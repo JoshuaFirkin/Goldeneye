@@ -11,7 +11,6 @@ public class AmmoPickup : Pickup
         if (weapon != null)
         {
             weapon.AddAmmo();
-            Destroy(gameObject);
         }
     }
 }

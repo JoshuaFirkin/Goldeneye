@@ -17,6 +17,7 @@ public class SpawnPlayer : MonoBehaviour
     public Transform[] spawnPoints;
     public Transform[] weaponSpawnPoints;
     public GameObject[] weaponTypes;
+    public float weaponRespawnTime = 30.0f;
 
     private GameObject weaponToSpawn;
 
@@ -28,6 +29,8 @@ public class SpawnPlayer : MonoBehaviour
         {
             possibleSpawnPoints.Add(point);
         }
+
+        StartCoroutine(RespawnWeapons());
     }
 
     public List<GameObject> InstancePlayer(int playerCount)
@@ -144,6 +147,10 @@ public class SpawnPlayer : MonoBehaviour
     {
         foreach (Transform point in weaponSpawnPoints)
         {
+            GameObject obj = CheckAvailableWeaponSpawnPoint(point.position);
+            if (obj != null)
+                continue;
+
             weaponToSpawn = weaponTypes[Random.Range(0, weaponTypes.Length)];
             Instantiate(weaponToSpawn, point.position, point.rotation);
         }
@@ -190,5 +197,16 @@ public class SpawnPlayer : MonoBehaviour
         }
 
         return null;
+    }
+
+
+    IEnumerator RespawnWeapons()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(weaponRespawnTime);
+            Debug.Log("Respawning weapons on map.");
+            SpawnWeaponsNormally();
+        }
     }
 }

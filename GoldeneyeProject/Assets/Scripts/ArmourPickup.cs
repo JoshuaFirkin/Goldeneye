@@ -10,7 +10,6 @@ public class ArmourPickup : Pickup
     {
         PlayerHealth player = other.GetComponentInParent<PlayerHealth>();
         player.PickupArmour(armourAmount);
-        Destroy(gameObject);
     }
 
 }
