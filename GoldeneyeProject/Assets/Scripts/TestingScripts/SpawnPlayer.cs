@@ -126,7 +126,8 @@ public class SpawnPlayer : MonoBehaviour
 
     public void MovePlayerToPoint(Transform player)
     {
-        player.position = new Vector3(possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.x, transform.position.y + 0.5f, possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)].position.z);
+        Transform point = possibleSpawnPoints[Random.Range(0, possibleSpawnPoints.Count)];
+        player.position = new Vector3(point.position.x, transform.position.y + 0.5f, point.position.z);
     }
 
     public void SpawnGoldenGun()

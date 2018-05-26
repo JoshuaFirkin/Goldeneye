@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/Archives.unity
+- path: Assets/Scenes/Temple_Josh.unity
   isLoaded: 1
   isActive: 1
