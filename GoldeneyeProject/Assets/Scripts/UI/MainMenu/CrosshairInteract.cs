@@ -104,7 +104,7 @@ public class CrosshairInteract : MonoBehaviour {
                 break;
             case 4:
                 levelName = "Basement(Harry)";
-                levelKey = "Basement";
+                levelKey = "Basement_Harry";
                 levelNumber++;
                 break;
             case 5:
