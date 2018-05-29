@@ -11,10 +11,29 @@ public class TimeKeeper : MonoBehaviour
     private Text endGameText;
     public GameObject endGameObj;
 
+    private Text framesText;
+    public GameObject framesObj;
+
+    private float secs = 0;
+
     private void Start()
     {
         timer = timerObj.GetComponent<Text>();
         endGameText = endGameObj.GetComponent<Text>();
+        framesText = framesObj.GetComponent<Text>();
+    }
+
+    private void Update()
+    {
+        secs += Time.deltaTime;
+        if (secs > 0.5f)
+        {
+            secs = 0;
+
+            float frames = 1.0f / Time.deltaTime;
+            int framesInt = Mathf.RoundToInt(frames);
+            framesText.text = framesInt + " FPS";
+        }
     }
 
     public void TurnOffTimer()
